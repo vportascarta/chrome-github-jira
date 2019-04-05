@@ -11,6 +11,7 @@ This extension shows contents of linked tasks from Jira in Github
 - Load unpacked extension
 - Select that folder
 
+Then right click on the new icon and in the options add the url to the jira repo.
 
 ### Changelog
 
