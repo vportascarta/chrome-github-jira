@@ -3,10 +3,6 @@ This extension shows contents of linked tasks from Jira in Github
 
 # How to install
 
-## Use the webstore
-
-Install from here: https://chrome.google.com/webstore/detail/github-jira-integration/faenbbkpfnklhncjianlfllkfekgghih
-
 ## Use this source
 
 - Throw this source in a folder somewhere
@@ -17,6 +13,9 @@ Install from here: https://chrome.google.com/webstore/detail/github-jira-integra
 
 
 ### Changelog
+
+#### Added
+ - Change regex to find jira project id in PR title
 
 #### 1.2.0
 - Added option to disable automatic title generation
