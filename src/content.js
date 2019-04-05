@@ -12,8 +12,8 @@ chrome.storage.sync.get({
     jiraUrl: '',
     acceptanceStartString: 'h3. Acceptance Criteria',
     acceptanceEndString: 'h3. Notes',
-    prTemplateEnabled: true,
-    prTitleEnabled: true,
+    prTemplateEnabled: false,
+    prTitleEnabled: false,
     prTemplate: '### Fix {{TICKETNUMBER}}' + NL +
         'Link to ticket: {{TICKETURL}}' + NL +
         NL +
