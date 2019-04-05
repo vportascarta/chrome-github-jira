@@ -43,7 +43,7 @@ chrome.storage.sync.get({
     prTemplateEnabled = items.prTemplateEnabled;
     prTitleEnabled = items.prTitleEnabled;
 
-    if (jiraUrl == '') {
+    if (jiraUrl === '') {
         console.error('GitHub Jira plugin could not load: Jira URL is not set.');
         return;
     }
@@ -52,7 +52,7 @@ chrome.storage.sync.get({
     chrome.runtime.sendMessage(
         {query: 'getSession', jiraUrl: jiraUrl},
         function(loginResult) {
-            if (loginResult.name == undefined) {
+            if (loginResult.name === undefined) {
                 console.error('You are not logged in to Jira at http://'+jiraUrl+' - Please login.');
                 return;
             }
@@ -102,12 +102,12 @@ function handleCommitsTitle() {
         let $itemLink = $item.find('a');
         let itemLinkHtml = $itemLink.html();
 
-        if (!itemLinkHtml.match(/([A-Z]+-[0-9]+)/g)) {
+        if (!itemLinkHtml.match(/([A-Z0-9]+-[0-9]+)/g)) {
             return;
         }
 
         let aHref = $itemLink[0].href;
-        let splittedContent = itemLinkHtml.split(/([A-Z]+-[0-9]+)/g);
+        let splittedContent = itemLinkHtml.split(/([A-Z0-9]+-[0-9]+)/g);
 
         $item.html('');
         for(var i=0; i< splittedContent.length; i+=3) {
@@ -122,12 +122,12 @@ function handleCommitsTitle() {
 
 function handlePrPage() {
     let title = $("h1 > span.js-issue-title").html();
-    if (title == undefined || $('#insertedJiraData').length > 0) {
+    if (title === undefined || $('#insertedJiraData').length > 0) {
         //If we didn't find a ticket, or the data is already inserted, cancel.
         return false;
     }
 
-    let ticketNumber = title.match(/([A-Z]+-[0-9]+)/);
+    let ticketNumber = title.match(/([A-Z0-9]+-[0-9]+)/);
     if (null == ticketNumber) {
         //Title was found, but ticket number wasn't.
         return false;
@@ -138,7 +138,7 @@ function handlePrPage() {
     //Replace title with clickable link to jira ticket
     $("h1 > span.js-issue-title").html(
         title.replace(
-            /([A-Z]+-[0-9]+)/,
+            /([A-Z0-9]+-[0-9]+)/,
             '<a href="'+ticketUrl+'" target="_blank" alt="Ticket in Jira">'+ticketNumber+'</a>'
         )
     );
@@ -184,12 +184,12 @@ function handlePrPage() {
 }
 
 function handlePrCreatePage() {
-    if (prTitleEnabled == false && prTemplateEnabled == false) {
+    if (prTitleEnabled === false && prTemplateEnabled === false) {
         return;
     }
 
     let body = $("textarea#pull_request_body");
-    if (body.attr('jira-loading') == 1) {
+    if (body.attr('jira-loading') === 1) {
         return false; //Already loading
     }
     body.attr('jira-loading', 1);
@@ -198,8 +198,8 @@ function handlePrCreatePage() {
     let ticketUrl = '**No linked ticket**';
     let acceptanceList = '';
     let ticketNumber = '?';
-    if (title != undefined) {
-        let titleMatch = title.match(/([a-zA-Z]+-[0-9]+)/);
+    if (title !== undefined) {
+        let titleMatch = title.match(/([a-zA-Z0-9]+-[0-9]+)/);
         if (titleMatch) {
             // Found a title, fetch some info from the ticket
             // Get the last one in the list.
