@@ -1,12 +1,12 @@
 {
     "manifest_version": 2,
-    "name": "GitHub Jira Integration",
-    "version": "1.2.0",
+    "name": "Jira in Github",
+    "version": "1.0.0",
 
     "description": "This extension shows contents of linked tasks from Jira in Github",
 
-    "author": "Rob Quist / DukeSoft",
-    "homepage_url": "https://github.com/RobQuistNL/chrome-github-jira",
+    "author": "Modified by Vincent PORTA  / Created by Rob QUIST",
+    "homepage_url": "https://github.com/vportascarta/chrome-github-jira",
 
     "options_ui": {
         "page": "src/options.html",
