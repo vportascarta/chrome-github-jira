@@ -154,6 +154,9 @@ function handlePrPage() {
                 let assigneeImage = assignee ? assignee.avatarUrls['16x16'] : jiraLogo;
                 let reporterImage = reporter ? reporter.avatarUrls['16x16'] : jiraLogo;
 
+                let assigneeDisplayName = assignee ? assignee.displayName : 'Unknown';
+                let reporterDisplayName = reporter ? reporter.displayName : 'Unknown';
+
                 $("#insertedJiraData").html(
                     '<div class="TableObject gh-header-meta">' +
                     '<div class="TableObject-item">' +
@@ -169,9 +172,9 @@ function handlePrPage() {
                     '<div class="TableObject-item TableObject-item--primary">' +
                     '<b><a href="' + ticketUrl + '" target="_blank">[' + ticketNumber + '] - ' + result.fields.summary + '</a></b>' +
                     ' - Reported by ' +
-                    '<span class="author text-bold"><img src="' + assigneeImage + '" width="16"/> ' + assignee.displayName + '</span>' +
+                    '<span class="author text-bold"><img src="' + reporterImage + '" width="16"/> ' + reporterDisplayName + '</span>' +
                     ' and assigned to ' +
-                    '<span class="author text-bold"><img src="' + reporterImage + '" width="16"/> ' + reporter.displayName + '</span>' +
+                    '<span class="author text-bold"><img src="' + assigneeImage + '" width="16"/> ' + assigneeDisplayName + '</span>' +
                     '</div>' +
                     '</div>'
                 );
