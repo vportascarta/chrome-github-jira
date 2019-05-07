@@ -147,33 +147,35 @@ function handlePrPage() {
     chrome.runtime.sendMessage(
         {query: 'getTicketInfo', jiraUrl: jiraUrl, ticketNumber: ticketNumber},
         function (result) {
-            let assignee = result.fields.assignee;
-            let reporter = result.fields.reporter;
+            if (result.fields) {
+                let assignee = result.fields.assignee;
+                let reporter = result.fields.reporter;
 
-            let assigneeImage = assignee.avatarUrls['16x16'];
-            let reporterImage = reporter.avatarUrls['16x16'];
+                let assigneeImage = assignee ? assignee.avatarUrls['16x16'] : jiraLogo;
+                let reporterImage = reporter ? reporter.avatarUrls['16x16'] : jiraLogo;
 
-            $("#insertedJiraData").html(
-                '<div class="TableObject gh-header-meta">' +
-                '<div class="TableObject-item">' +
-                '<span class="State State--green" style="background-color: rgb(160,197,215);">' +
-                '<img height="16" class="octicon" width="12" aria-hidden="true" src="' + jiraLogo + '"/> <a style="color:white;" href="' + ticketUrl + '" target="_blank">Jira</a>' +
-                '</span>' +
-                '</div>' +
-                '<div class="TableObject-item">' +
-                '<span class="State State--white" style="background-color: rgb(220, 220, 220);color:rgb(40,40,40);">' +
-                '<img height="16" class="octicon" width="12" aria-hidden="true" src="' + result.fields.status.iconUrl + '"/> ' + result.fields.status.name +
-                '</span>' +
-                '</div>' +
-                '<div class="TableObject-item TableObject-item--primary">' +
-                '<b><a href="' + ticketUrl + '" target="_blank">[' + ticketNumber + '] - ' + result.fields.summary + '</a></b>' +
-                ' - Reported by ' +
-                '<span class="author text-bold"><img src="' + assigneeImage + '" width="16"/> ' + assignee.displayName + '</span>' +
-                ' and assigned to ' +
-                '<span class="author text-bold"><img src="' + reporterImage + '" width="16"/> ' + reporter.displayName + '</span>' +
-                '</div>' +
-                '</div>'
-            );
+                $("#insertedJiraData").html(
+                    '<div class="TableObject gh-header-meta">' +
+                    '<div class="TableObject-item">' +
+                    '<span class="State State--green" style="background-color: rgb(160,197,215);">' +
+                    '<img height="16" class="octicon" width="12" aria-hidden="true" src="' + jiraLogo + '"/> <a style="color:white;" href="' + ticketUrl + '" target="_blank">Jira</a>' +
+                    '</span>' +
+                    '</div>' +
+                    '<div class="TableObject-item">' +
+                    '<span class="State State--white" style="background-color: rgb(220, 220, 220);color:rgb(40,40,40);">' +
+                    '<img height="16" class="octicon" width="12" aria-hidden="true" src="' + result.fields.status.iconUrl + '"/> ' + result.fields.status.name +
+                    '</span>' +
+                    '</div>' +
+                    '<div class="TableObject-item TableObject-item--primary">' +
+                    '<b><a href="' + ticketUrl + '" target="_blank">[' + ticketNumber + '] - ' + result.fields.summary + '</a></b>' +
+                    ' - Reported by ' +
+                    '<span class="author text-bold"><img src="' + assigneeImage + '" width="16"/> ' + assignee.displayName + '</span>' +
+                    ' and assigned to ' +
+                    '<span class="author text-bold"><img src="' + reporterImage + '" width="16"/> ' + reporter.displayName + '</span>' +
+                    '</div>' +
+                    '</div>'
+                );
+            }
         }
     );
 }
